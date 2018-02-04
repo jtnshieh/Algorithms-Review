@@ -1,0 +1,162 @@
+<script>
+  function mysteryScoping1() {
+    var x = 'out of block';
+    if (true) {
+      var x = 'in block';
+      console.log(x);
+    }
+    console.log(x);
+  }
+
+  // mysteryScoping1()
+
+  function isSubstring(searchString, subString) {
+    return searchString.split(" ").includes(subString)
+  }
+
+  // console.log(isSubstring("time to program", "time"));
+
+  function titleize(array, cb) {
+    const newArray = array.map(name =>
+      `Mx. ${name} Jingleheimer Schmidt`
+    );
+    callback(newArray)
+  };
+
+  function merge(left, right) {
+    let newArray = [];
+
+    while (left.length > 0 && right.length > 0) {
+      let newItem = (left[0] < right[0]) ? left.shift() : right.shift();
+      newArray.push(newItem);
+    }
+
+    return newArray.concat(left, right);
+  };
+
+  function mergeSort(array) {
+    if (array.length < 2) {
+      return array;
+    } else {
+      let mid = Math.floor(array.length/2);
+
+      let left = mergeSort(array.slice(0, mid));
+      let right = mergeSort(array.slice(mid));
+
+      return merge(left, right);
+    }
+  };
+
+  // console.log(mergeSort([3,2,4,1,9,1,5,2]));
+
+  function quickSort(array) {
+    if (array.length < 2) {
+      return array;
+    }
+
+    let pivot = [array[0]];
+
+    let left = [];
+    let right = [];
+    for (let i = 1; i < array.length; i++) {
+      if (array[i] < array[0]) {
+        left.push(array[i]);
+      } else {
+        right.push(array[i]);
+      }
+    }
+
+    return quickSort(left).concat(pivot).concat(quickSort(right));
+  }
+
+  // console.log(quickSort([3,2,4,1,9,1,5,2]));
+
+  let cache = [];
+  function fib(n) {
+    if (cache[n] != undefined) {
+      console.log("cache hit");
+      return cache[n];
+    }
+
+    // base case
+    if (n < 0) {
+      throw "Invalid input.";
+    }
+
+    if (n === 0) {
+      return 1;
+    } else if (n === 1) {
+      return 1;
+    }
+
+    let result = fib(n-2) + fib(n-1);
+    cache[n] = result;
+    return result;
+  }
+
+
+  function fib3(n) {
+    if (n < 0) {
+      throw "Invalid input.";
+    }
+
+    if (n === 0) {
+      return 1;
+    } else if (n === 1) {
+      return 1;
+    }
+
+    let n1 = 1;
+    let n2 = 1;
+    let count = 0;
+    let next;
+
+    while (count !== n-1) {
+      next = n1 + n2;
+      count += 1;
+      n1 = n2;
+      n2 = next;
+    }
+
+    return next;
+  }
+
+  try {
+  fib(-1);
+  } catch(e) {
+  console.log("good");
+  }
+
+  console.log(fib(0));
+  console.log(fib(1));
+
+  console.log(fib(3));
+  console.log(fib(4));
+  console.log(fib(5));
+
+  console.log(fib(20));
+  console.log(fib(21));
+  console.log(fib(22) == fib(20) + fib(21));
+
+  //console.log(fib(99999999));
+
+  var averageOfLevels = function(root) {
+    let queue = [root];
+    let averages = [];
+
+    while (queue.length !== 0) {
+        let count = queue.length;
+        let sum = 0;
+        for (let i = 0; i < count; i++) {
+            let current = queue.shift();
+            sum += current.val;
+            if (current.left !== null) { queue.push(current.left); }
+            if (current.right !== null) { queue.push(current.right); }
+        }
+        averages.push(sum/count);
+    }
+
+    return averages;
+  };
+
+</script>
