@@ -250,8 +250,31 @@
             }
         }
     }
-            
+
     return max;
+  };
+
+  var removeNthFromEnd = function(head, n) {
+    let pointer1 = head;
+    let pointer2 = head;
+
+    for (let i = 0; i < n; i++) {
+        pointer1 = pointer1.next;
+    }
+
+    if (!pointer1) {
+        return head.next;
+    }
+
+    while (pointer1.next !== null) {
+        pointer1 = pointer1.next;
+        pointer2 = pointer2.next;
+    }
+
+    pointer2.next = pointer2.next.next;
+    
+    return head;
+
   };
 
 </script>
