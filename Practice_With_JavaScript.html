@@ -272,9 +272,18 @@
     }
 
     pointer2.next = pointer2.next.next;
-    
+
     return head;
 
   };
+
+  var lengthOfLongestSubstring = function(s) {
+    let result = 0, t = []
+    for (var i = 0; i < s.length; i++) {
+        t = t.slice(t.indexOf(s[i]) + 1)
+        result = Math.max(t.push(s[i]), result)
+    }
+    return result
+  }
 
 </script>
