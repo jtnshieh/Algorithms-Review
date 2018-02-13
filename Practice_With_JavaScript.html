@@ -286,4 +286,26 @@
     return result
   }
 
+  function minWindow(s, t) {
+  let l = 0, r = 0, start = 0, end = s.length + 1, count = t.length;
+  const map = {};
+  for (const key in t) {
+    map[t[key]] == null ? map[t[key]] = 1 : map[t[key]]++;
+  }
+  while (r < s.length) {
+    if (map[s[r++]]-- > 0) {
+      count--;
+    }
+    while (count === 0) {
+      if (r - l < end) {
+        end = r - (start = l);
+      }
+      if (map[s[l++]]++ === 0) {
+        count++;
+      }
+    }
+  }
+  return end === s.length + 1 ? "" : s.substr(start, end);
+  }
+
 </script>
