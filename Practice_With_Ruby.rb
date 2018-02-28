@@ -42,3 +42,14 @@ def sum_rec(nums)
   return 0 if nums.empty?
   nums[0] + sum_rec(nums.drop(1))
 end
+
+def fibs(num)
+  return [] if num == 0
+  return [0] if num == 1
+  return [0, 1] if num == 2
+
+  prev_fibs = fibs(num - 1)
+  prev_fibs << prev_fibs[-1]  + prev_fibs[-2]
+
+  prev_fibs
+end
