@@ -43,6 +43,8 @@ def sum_rec(nums)
   nums[0] + sum_rec(nums.drop(1))
 end
 
+
+
 def fibs(num)
   return [] if num == 0
   return [0] if num == 1
