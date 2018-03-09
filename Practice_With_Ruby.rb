@@ -55,3 +55,15 @@ def fibs(num)
 
   prev_fibs
 end
+
+def my_sqrt(x)
+    return x if x.nil? || x <= 1
+    return cal_sqrt(x, 0, x)
+end
+
+def cal_sqrt(x, a, b)
+    r = (a+b)/2
+    r_2 = r * r
+    return r if r_2 <= x && (r+1) ** 2 > x
+    r_2 > x ? cal_sqrt(x, a, r) : cal_sqrt(x, r, b)
+end
