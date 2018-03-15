@@ -329,6 +329,24 @@
     return stack.length === 0;
   };
 
+  //preorder traversal
+  const preorderTraversal = (root) => {
+    if (!root) return [];
+
+    const output = [];
+    const nodestack = [root];
+
+    while (nodestack.length) {
+        const { left, right, val } = nodestack.pop();
+        output.push(val);
+
+        if (right) nodestack.push(right);
+        if (left) nodestack.push(left);
+    }
+
+    return output;
+  };
+
 
 
 </script>
