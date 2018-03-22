@@ -369,6 +369,19 @@
 
   };
 
+  var climbStairs = function(n) {
+    let a = 1;
+    let b = 1;
+
+    for (let i = 0; i < n; i++) {
+        temp = a;
+        a = b;
+        b = temp + b;
+    }
+
+    return a;
+  };
+
 
 
 </script>
