@@ -386,6 +386,37 @@
     return string.trim().replace(/\s/g, '%20');
   }
 
+  var letterCombinations = function(digits) {
+    let interpretDigit = {
+            '1': '',
+            '2': 'abc',
+            '3': 'def',
+            '4': 'ghi',
+            '5': 'jkl',
+            '6': 'mno',
+            '7': 'pqrs',
+            '8': 'tuv',
+            '9': 'wxyz',
+            '0': ' '}
+    if (digits.length === 0) {
+        return [];
+    }
+    let allCombinations = [""];
+    for (let i = 0; i < digits.length; i++) {
+        let currentCombinations = [];
+        let letters = interpretDigit[digits[i]];
+        for (let j = 0; j < letters.length; j++) {
+            for (let z = 0; z < allCombinations.length; z++) {
+                let newCombo = allCombinations[z] + letters[j];
+                currentCombinations.push(newCombo);
+            }
+        }
+        allCombinations = currentCombinations;
+    }
+
+    return allCombinations;
+  };
+
 
 
 </script>
