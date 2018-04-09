@@ -417,4 +417,73 @@
     return allCombinations;
   };
 
+  function findPath(maze, src, dest) {
+    const checkNode = (node) => {
+      if (!node || !Number.isInteger(node.row) ||
+          node.row < 0 || !Number.isInteger(node.col) ||
+          node.col < 0) {
+        return false;
+      } else {
+        return true;
+      }
+    };
+
+    if (!maze || !Array.isArray(maze) ||
+        !Array.isArray(maze[0]) ||
+        !checkNode(src) || !checkNode(dest)) {
+      return NaN;
+    }
+
+    const isEqual = (node1, node2) => {
+      return node1.row === node2.row && node1.col === node2.col;
+    };
+
+    if (isEqual(src, dest)) {
+      return 0;
+    }
+
+    const rowNum = [-1, 0, 1, 0];
+    const colNum = [0, 1, 0, -1];
+    const nodeProto = (row, col, dist = 0) => {
+      return {row, col, dist};
+    };
+    let q = [];
+    let visited = new Set();
+
+    src.dist = 0;
+    q.push(src);
+
+    while (q.length > 0) {
+      let node = q.shift();
+      if (isEqual(node, dest)) {
+        return node.dist;
+      };
+      for (let i = 0; i < 4; i++) {
+        let row = rowNum[i] + node.row;
+        let col = colNum[i] + node.col;
+        if (row < 0 || row > m.length - 1 || col < 0 || col > m[0].length - 1) {
+          continue;
+        }
+        let _node = nodeProto(row, col, node.dist + 1);
+        if (m[row][col] === 1 && !visited.has(_node.row.toString() + _node.col.toString())) {
+          visited.add(_node.row.toString() + _node.col.toString());
+          q.push(_node);
+        }
+      }
+    }
+  }
+  //Example:
+
+  let m = [[1, 0, 1, 1, 1, 1, 0, 1, 1, 1 ],
+  [1, 0, 1, 0, 1, 1, 1, 0, 1, 1 ],
+  [1, 1, 1, 0, 1, 1, 0, 1, 0, 1 ],
+  [0, 0, 0, 0, 1, 0, 0, 0, 0, 1 ],
+  [1, 1, 1, 0, 1, 1, 1, 0, 1, 0 ],
+  [1, 0, 1, 1, 1, 1, 0, 1, 0, 0 ],
+  [1, 0, 0, 0, 0, 0, 0, 0, 0, 1 ],
+  [1, 0, 1, 1, 1, 1, 0, 1, 1, 1 ],
+  [1, 1, 0, 0, 0, 0, 1, 0, 0, 1 ]];
+
+  let result = findPath(m, {row:0, col:0}, {row:3, col:4});
+  console.log(result)
 </script>
